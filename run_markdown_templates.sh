@@ -11,8 +11,7 @@
 # To update:
 #   dotnet tool update  -g MarkdownSnippets.Tool
 
-# 20.0.0-beta.3
-dotnet tool update --version 20.0.0-beta.3 -g MarkdownSnippets.Tool
+dotnet tool update  -g MarkdownSnippets.Tool
 mdsnippets || exit 1
 
 echo "------------------------------------------"
