@@ -5,8 +5,8 @@ digraph mdsnippets_flow {
 
     "mdsnippets" [shape = oval, fillcolor = lightgray, style = filled]
 
-    "docs_md" [label = "doc/*.md"]
-    "docs_md" -> "mdsnippets"
+    "docs_md_input" [label = "doc/*.md"]
+    "docs_md_input" -> "mdsnippets"
 
     "docs_include_md" [label = "doc/mdsource/*.include.md"]
     "docs_include_md" -> "mdsnippets"
@@ -20,5 +20,6 @@ digraph mdsnippets_flow {
     "mdsnippets_json" [label = "mdsnippets.json"]
     "mdsnippets_json" -> "mdsnippets"
 
-    "mdsnippets" -> "docs_md"
+    "docs_md_output" [label = "doc/*.md"]
+    "mdsnippets" -> "docs_md_output" [label = "  (input files are updated\l  if any snippets changed)"]
 }
