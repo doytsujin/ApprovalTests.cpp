@@ -121,7 +121,6 @@ On platforms other than macOS, replace the `open` command with whatever command 
 
 * I've taken the view that it's better to generate the docs unnecessarily, rather than wrongly failing to regenerate. This means that several of the dependencies are too general. For example, mdsnippets is rerun if any source or approved file is changed, regardless of whether the source file contains any snippets, or the approved file is included in the docs
 * Editing `index.rst` or `api/*.rst` should not cause all the generated `.rst` files to be regenerated.
-* Doing a `clean` build should not remove all the generated `.md` files.
 
 ## Implementation Details
 
