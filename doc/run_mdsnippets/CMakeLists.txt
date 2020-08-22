@@ -4,37 +4,18 @@ if (NOT mdsnippets_FOUND)
     return()
 endif ()
 
-file(GLOB
-        APPROVAL_TESTS_ALL_ROOT_SOURCE_MD_FILES
-        CONFIGURE_DEPENDS
-        ${PROJECT_SOURCE_DIR}/mdsource/*.source.md)
+# Depend on an intentionally missing file, to force
+# mdsnippets to always run.
+# This is because mdsnippets overwrites .md output
+# files, when working in-place, and so there is no way
+# for us to detect whether or not the .md files are
+# out-of-date and need to be updated.
+set(NON_EXISTENT_TARGET "_non_existent_file.md")
 
-file(GLOB_RECURSE
-        APPROVAL_TESTS_ALL_DOC_INCLUDE_MD_FILES
-        CONFIGURE_DEPENDS
-        ${PROJECT_SOURCE_DIR}/doc/*.include.md)
-
-# If any .source.md files have been changed, or their inputs,
-# rerun mdsnippets
-# TODO Fix this - this is now not yet rerun if a .md
-#      file is updated
-list(GET APPROVAL_TESTS_GEN_DOC_MD_FILES 0 FIRST_GENERATED_MD_FILE)
-set(OTHER_GENERATED_MD_FILES ${APPROVAL_TESTS_GEN_DOC_MD_FILES})
-list(REMOVE_AT OTHER_GENERATED_MD_FILES 0)
-
-add_custom_command(OUTPUT ${FIRST_GENERATED_MD_FILE}
+add_custom_command(OUTPUT ${NON_EXISTENT_TARGET}
         COMMAND mdsnippets
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        DEPENDS
-        ${APPROVAL_TESTS_ALL_DOC_SOURCE_MD_FILES}
-        ${APPROVAL_TESTS_ALL_DOC_INCLUDE_MD_FILES}
-        ${APPROVAL_TESTS_ALL_ROOT_SOURCE_MD_FILES}
-        ${APPROVAL_TESTS_PUBLIC_SOURCE}
-        ${APPROVAL_TESTS_ALL_TEST_FILES}
-        ${APPROVAL_TESTS_ALL_EXAMPLE_FILES}
-        ${PROJECT_SOURCE_DIR}/mdsnippets.json
-        BYPRODUCTS ${OTHER_GENERATED_MD_FILES}
         )
 
 # Nice named target so we can run the job easily
-add_custom_target(RunMdsnippets DEPENDS ${FIRST_GENERATED_MD_FILE})
+add_custom_target(RunMdsnippets DEPENDS ${NON_EXISTENT_TARGET})
