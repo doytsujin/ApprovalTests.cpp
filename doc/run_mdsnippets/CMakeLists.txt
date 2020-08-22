@@ -16,6 +16,8 @@ file(GLOB_RECURSE
 
 # If any .source.md files have been changed, or their inputs,
 # rerun mdsnippets
+# TODO Fix this - this is now not yet rerun if a .md
+#      file is updated
 list(GET APPROVAL_TESTS_GEN_DOC_MD_FILES 0 FIRST_GENERATED_MD_FILE)
 set(OTHER_GENERATED_MD_FILES ${APPROVAL_TESTS_GEN_DOC_MD_FILES})
 list(REMOVE_AT OTHER_GENERATED_MD_FILES 0)
